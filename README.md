@@ -1,8 +1,6 @@
-# Practicing Test-Driven Development
+= Practicing Test-Driven Development =
 
-TDD Katas
-=========
-
+== Instructions ==
 The purpose of the exercises included here is to provide an experience of what it feels like to guide software construction by tests. 
 
 A process model you could follow is:
