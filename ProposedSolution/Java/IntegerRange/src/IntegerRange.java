@@ -58,7 +58,7 @@ public class IntegerRange {
 			return new IntegerRange(greatestLowerBound, smallestUpperBound);
 		}
 	}
-
+	
 	/**
 	 * @param anotherRange
 	 * @return an IntegerRange that is the smallest IntegerRange that includes
