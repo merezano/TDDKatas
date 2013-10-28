@@ -1,7 +1,7 @@
 # Practicing Test-Driven Development
 
 ## Instructions
-The purpose of the exercises included here is to provide an experience of what it feels like to guide software construction by tests. 
+The purpose of these exercises is to provide an experience of what it feels like to guide software construction by tests. 
 
 A process model you could follow is:
 1. Define a common test fixture (e.g., objects with specific test data) that you will likely need for most of the test cases. 
