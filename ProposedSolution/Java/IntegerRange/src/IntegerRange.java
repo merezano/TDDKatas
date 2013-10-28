@@ -1,5 +1,3 @@
-
-
 public class IntegerRange {
 	int lowerBound, upperBound;
 
