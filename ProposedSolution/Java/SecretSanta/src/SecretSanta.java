@@ -8,12 +8,15 @@ import java.util.List;
 public class SecretSanta {
 	private List<String> participants;
 
-	public HashMap<String, String> getSantas() {
-		if (participants.size() < 3)
+	public SecretSanta() {
+		participants = new ArrayList<String>();
+	}
+
+	public void addParticipant(String newParticipant) {
+		if (participants.contains(newParticipant))
 			throw new IllegalStateException();
 
-		shuffleParticipants();
-		return autoAssignment();
+		participants.add(newParticipant);
 	}
 
 	private HashMap<String, String> autoAssignment() {
@@ -27,23 +30,20 @@ public class SecretSanta {
 		return santas;
 	}
 
-	private void shuffleParticipants() {
-		Collections.shuffle(participants);
-	}
-
-	public SecretSanta() {
-		participants = new ArrayList<String>();
-	}
-
 	public List<String> getParticipants() {
 		return participants;
 	}
 
-	public void addParticipant(String newParticipant) {
-		if (participants.contains(newParticipant))
+	public HashMap<String, String> getSantas() {
+		if (participants.size() < 3)
 			throw new IllegalStateException();
 
-		participants.add(newParticipant);
+		shuffleParticipants();
+		return autoAssignment();
+	}
+
+	private void shuffleParticipants() {
+		Collections.shuffle(participants);
 	}
 
 }
