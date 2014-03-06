@@ -9,11 +9,11 @@ A process model you could follow is:
 
 2. Write a new test case
 
-..a. Make sure the test case name reveals the scenario being tested and the expected behavior.
+	..a. Make sure the test case name reveals the scenario being tested and the expected behavior.
 
-..b. Make sure the test case structure exercises the SUT, and verifies the results.
+	..b. Make sure the test case structure exercises the SUT, and verifies the results.
 
-..c. Some generic assertions you might need includes: `assertEquals, assertNull, assertNotNull, assertTrue, assertFalse, and expected = <exception>`.
+	..c. Some generic assertions you might need includes: `assertEquals, assertNull, assertNotNull, assertTrue, assertFalse, and expected = <exception>`.
 
 3. Write the code that would make the pass pass. 
 
