@@ -1,79 +1,75 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class SecretSantaTest {
-	SecretSanta sut;
+	private SecretSanta sut;
 
 	@Before
-	public void setUp() throws Exception {
+	public final void setUp() throws Exception {
 		sut = new SecretSanta();
-		sut.addParticipant("amy");
-		sut.addParticipant("bob");
-		sut.addParticipant("charlie");
+		sut.addParticipant("Amy");
+		sut.addParticipant("Bob");
+		sut.addParticipant("Charlie");
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void cannotAssignSantasWithAnEmptyListOfParticipants() {
+	public final void cannotDrawWithNoParticipants() {
 		SecretSanta emptySanta = new SecretSanta();
-		emptySanta.getSantas();
+		emptySanta.draw();
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void twoParticipantsDontMakeASecretSanta() {
+	public final void requireAtLeastThreeParticipants() {
 		SecretSanta sillySanta = new SecretSanta();
-		sillySanta.addParticipant("amy");
-		sillySanta.addParticipant("bob");
-		sillySanta.getSantas();
+		sillySanta.addParticipant("Dumb");
+		sillySanta.addParticipant("Dumber");
+		sillySanta.draw();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public final void requireUniqueParticipants() {
+		sut.addParticipant("Amy");
 	}
 
 	@Test
-	public void participantIsAddedToTheList() {
+	public final void participantIsAddedToTheList() {
 		sut.addParticipant("david");
-		assertTrue(sut.getParticipants().contains("david"));
+		assertTrue(sut.participants().contains("david"));
 	}
 
 	@Test
-	public void aSecretSantaWithThreeParticipantsIsOK() {
-		assertEquals(3, sut.getSantas().size());
+	public final void aSecretSantaWithThreeParticipantsIsOK() {
+		sut.draw();
+		assertEquals(sut.participants().size(), sut.pairs().size());
 	}
 
 	@Test
-	public void everyParticipantIsASanta() {
-		sut.addParticipant("david");
-		List<String> participants = sut.getParticipants();
-		Map<String, String> santas = sut.getSantas();
-
-		assertTrue(santas.keySet().containsAll(participants));
+	public final void everyParticipantIsASanta() {
+		sut.draw();
+		final Set<String> santas = sut.pairs().keySet();
+		assertTrue(santas.containsAll(sut.participants()));
 	}
 
 	@Test
-	public void everyParticipantHasASanta() {
-		List<String> participants = sut.getParticipants();
-		Map<String, String> santas = sut.getSantas();
-
-		assertTrue(santas.values().containsAll(participants));
+	public final void everyParticipantHasASanta() {
+		sut.draw();
+		final Collection<String> receivers = sut.pairs().values();
+		assertTrue(receivers.containsAll(sut.participants()));
 	}
 
 	@Test
-	public void noSelfSantas() {
-		List<String> participants = sut.getParticipants();
-		Map<String, String> santas = sut.getSantas();
-
-		for (String participant : participants) {
-			System.out.println(participant + " --> " + santas.get(participant));
-			assertTrue((String) santas.get(participant) != participant);
+	public final void ensureNoSelfSantas() {
+		for (Entry<String, String> pair : sut.pairs().entrySet()) {
+			assertTrue(pair.getKey() != pair.getValue());
 		}
-	}
-
-	@Test(expected = IllegalStateException.class)
-	public void participantsMustBeUnique() {
-		sut.addParticipant("amy");
 	}
 }

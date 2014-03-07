@@ -1,50 +1,49 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class SecretSanta {
+	private static final int MINIMUM_NUMBER_OF_PARTICIPANTS = 3;
 	private List<String> participants;
+	private Map<String, String> pairs;
 
 	public SecretSanta() {
 		participants = new ArrayList<String>();
+		pairs = new HashMap<String, String>();
 	}
 
-	public void addParticipant(String newParticipant) {
-		if (participants.contains(newParticipant))
-			throw new IllegalStateException();
+	public final void addParticipant(final String newParticipant) {
+		if (participants.contains(newParticipant)) {
+			throw new IllegalArgumentException("Participant already exists.");
+		}
 
 		participants.add(newParticipant);
 	}
 
-	private Map<String, String> autoAssignment() {
-		HashMap<String, String> santas = new HashMap<String, String>();
-
-		int i = 0;
-		for (String participant : participants) {
-			santas.put(participant, participants.get(++i % participants.size()));
+	/**
+	 * This method could it be a good candidate for Strategy pattern
+	 */
+	public void draw() {
+		if (participants.size() < MINIMUM_NUMBER_OF_PARTICIPANTS) {
+			throw new IllegalStateException("Not enough participants.");
 		}
 
-		return santas;
+		Collections.shuffle(participants);
+
+		int i = 0;
+		for (String santa : participants) {
+			final String receiver = participants.get(++i % participants.size());
+			pairs.put(santa, receiver);
+		}
 	}
 
-	public List<String> getParticipants() {
+	public final Map<String, String> pairs() {
+		return pairs;
+	}
+
+	public final List<String> participants() {
 		return participants;
 	}
-
-	public Map<String, String> getSantas() {
-		if (participants.size() < 3)
-			throw new IllegalStateException();
-
-		shuffleParticipants();
-		return autoAssignment();
-	}
-
-	private void shuffleParticipants() {
-		Collections.shuffle(participants);
-	}
-
 }
