@@ -2,11 +2,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class SecretSantaTest {
@@ -49,27 +48,23 @@ public class SecretSantaTest {
 	public void everyParticipantIsASanta() {
 		sut.addParticipant("david");
 		List<String> participants = sut.getParticipants();
-		HashMap<String, String> santas = sut.getSantas();
+		Map<String, String> santas = sut.getSantas();
 
-		for (String participant : participants) {
-			assertTrue(santas.containsKey(participant));
-		}
+		assertTrue(santas.keySet().containsAll(participants));
 	}
 
 	@Test
 	public void everyParticipantHasASanta() {
 		List<String> participants = sut.getParticipants();
-		HashMap<String, String> santas = sut.getSantas();
+		Map<String, String> santas = sut.getSantas();
 
-		for (String participant : participants) {
-			assertTrue(santas.containsValue(participant));
-		}
+		assertTrue(santas.values().containsAll(participants));
 	}
 
 	@Test
 	public void noSelfSantas() {
 		List<String> participants = sut.getParticipants();
-		HashMap<String, String> santas = sut.getSantas();
+		Map<String, String> santas = sut.getSantas();
 
 		for (String participant : participants) {
 			System.out.println(participant + " --> " + santas.get(participant));

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class SecretSanta {
 	private List<String> participants;
@@ -19,7 +20,7 @@ public class SecretSanta {
 		participants.add(newParticipant);
 	}
 
-	private HashMap<String, String> autoAssignment() {
+	private Map<String, String> autoAssignment() {
 		HashMap<String, String> santas = new HashMap<String, String>();
 
 		int i = 0;
@@ -34,7 +35,7 @@ public class SecretSanta {
 		return participants;
 	}
 
-	public HashMap<String, String> getSantas() {
+	public Map<String, String> getSantas() {
 		if (participants.size() < 3)
 			throw new IllegalStateException();
 
