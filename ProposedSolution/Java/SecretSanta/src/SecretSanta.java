@@ -23,7 +23,7 @@ public class SecretSanta {
 	}
 
 	/**
-	 * This method could it be a good candidate for Strategy pattern
+	 * TODO: This method could it be a good candidate for Strategy pattern
 	 */
 	public void draw() {
 		if (participants.size() < MINIMUM_NUMBER_OF_PARTICIPANTS) {
@@ -33,9 +33,9 @@ public class SecretSanta {
 		Collections.shuffle(participants);
 
 		int i = 0;
-		for (String santa : participants) {
+		for (String giver : participants) {
 			final String receiver = participants.get(++i % participants.size());
-			pairs.put(santa, receiver);
+			pairs.put(giver, receiver);
 		}
 	}
 
