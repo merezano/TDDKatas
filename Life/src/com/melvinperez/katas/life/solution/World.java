@@ -1,4 +1,8 @@
-package com.melvinperez.katas.solution.life;
+package com.melvinperez.katas.life.solution;
+/**
+ * @author melvinperez
+ *
+ */
 public class World {
 	private boolean[][] generation;
 	private final int height;

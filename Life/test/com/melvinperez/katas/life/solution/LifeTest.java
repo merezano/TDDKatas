@@ -1,11 +1,11 @@
-package com.melvinperez.katas.solution.life;
+package com.melvinperez.katas.life.solution;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.melvinperez.katas.solution.life.Life;
+import com.melvinperez.katas.life.solution.Life;
 
 public class LifeTest {
 
