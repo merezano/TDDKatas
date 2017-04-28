@@ -1,4 +1,4 @@
-#Triangle Type
+# Triangle Type
 
 *Adapted from The Art of Software Testing, 2nd ed., by Glenford Myers. (2004).*
 
